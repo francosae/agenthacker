@@ -61,7 +61,8 @@ return(
 )
 }
 
-function GameCard(){
+function GameCard({ user, index }){
+    console.log(index)
   return(
 <article class="rounded-xl border border-gray-700 bg-[#122c5a] p-4">
   <div class="flex items-center">
@@ -72,13 +73,14 @@ function GameCard(){
     />
 
     <div class="ml-3">
-      <h3 class="text-lg font-medium text-white">Agent Mac</h3>
+      <h3 class="text-lg font-medium text-white">Ranking: #{index + 1} 🏆</h3>
+      <h3 class="text-lg font-medium text-white">Agent {user.username}</h3>
     </div>
   </div>
 
   <ul class="mt-4 space-y-2">
     <li>
-      <PointCointer />
+      <PointCointer user={user}/>
     </li>
   </ul>
 </article>
@@ -95,18 +97,15 @@ function GameDisplay(){
         fetchUsers()
       }, [])
 
-      console.log(users)
 return(
 <section
   class="relative"
 >
-  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto mt-[-2vh] max-w-screen-xl min-h-[54vh] px-4 py-8 sm:px-6 lg:px-8">
     <div class="grid grid-cols-3 gap-4 ">
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
-        <GameCard />
+        {users?.map((user, index) => {
+            return <GameCard index={index} user={user} />
+        })}
     </div>
   </div>
   <br></br>
@@ -115,7 +114,7 @@ return(
 }
 
 
-function PointCointer(){
+function PointCointer({ user }){
 return(
 <article
   class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6"
@@ -138,7 +137,7 @@ return(
   </span>
 
   <div>
-    <p class="text-2xl font-medium text-gray-900">¤ 1000 </p>
+    <p class="text-2xl font-medium text-gray-900">¤ {user.totalpoints} </p>
 
     <p class="text-sm text-gray-500">Total Points</p>
   </div>
