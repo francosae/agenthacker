@@ -1,13 +1,13 @@
 import { useState } from "react"
-import PathTile from "./PathTile"
-import TileBoard from "./TileBoard"
-import puzzles from "./pathpuzzles.json"
+import Tile from "./Tile"
+import Board from "./Board"
+import puzzles from "./hotwire_puzzles.json"
 
 //Tiles represent different shaped pipes
 // '|' '-' '/' '\'
 //They match the direction that they go
 
-function CompletePath(){
+function Hotwire(){
     const [activeTile, setActiveTile] = useState('-');
 
     //Get a random puzzle
@@ -20,11 +20,11 @@ function CompletePath(){
 
     return(
         <div className="complete-path-window">
-            <h1>COMPLETE THE PATH</h1>
-            Active Tile: <PathTile type={activeTile}/>
-            <TileBoard size={puzzle.size} start={puzzle.start} end={puzzle.end} inner={puzzle.inner} onSelect={switchTile}/>
+            <h1>Complete the path from the blue node to the green!</h1>
+            Active Tile: <Tile type={activeTile}/>
+            <Board size={puzzle.size} start={puzzle.start} end={puzzle.end} inner={puzzle.inner} onSelect={switchTile}/>
         </div>
     )
 }
 
-export default CompletePath
+export default Hotwire
