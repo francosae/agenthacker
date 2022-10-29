@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Wordle from './pages/Wordle'
+import Landing from './pages/Landing'
+import Dashboard from './pages/Dashboard'
 
-function App() {
+export default function App() {
+
   return (
-    <div className="App">
-      hello
-    </div>
+      <>
+      <BrowserRouter forceRefresh={true}>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/wordle" element={<Wordle />} />
+        <Route path="/home" element={<Dashboard /> } /> 
+      </Routes>
+      </BrowserRouter>
+      </>
   )
 }
-
-export default App
