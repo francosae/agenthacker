@@ -38,4 +38,4 @@ function Board(props){
     )
 }
 
-export default TileBoard
+export default Board

@@ -2,16 +2,15 @@ import { useState } from 'react'
 
 import './tile.css'
 
-const imagePath = "../../assets/"
 //Tile images
-import tileUp from `${imagePath}tile_up.png`
-import tileSide from `${imagePath}tile_side.png`
-import tileLeftUp from `${imagePath}tile_left_up.png`
-import tileRightUp from `${imagePath}tile_right_up.png`
-import tileLeftDown from `${imagePath}tile_left_down.png`
-import tileRightDown from `${imagePath}tile_right_down.png`
-import tileBlank from `${imagePath}tile_blank.png`
-import tileGoal from `${imagePath}tile_goal.png`
+import tileUp from '../../assets/tile_up.png'
+import tileSide from '../../assets/tile_side.png'
+import tileLeftUp from '../../assets/tile_left_up.png'
+import tileRightUp from '../../assets/tile_right_up.png'
+import tileLeftDown from '../../assets/tile_left_down.png'
+import tileRightDown from '../../assets/tile_right_down.png'
+import tileBlank from '../../assets/tile_blank.png'
+import tileGoal from '../../assets/tile_goal.png'
 
 function Tile(props){
     const [type, setType] = useState(props.type); //the wire direction for the tiles
