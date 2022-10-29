@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useAuthContext } from '../contexts/user'
 function Dashboard() {
   return (
   <>
@@ -14,6 +15,7 @@ function Dashboard() {
 }
 
 function Header(){
+  const { user } = useAuthContext();
   return(
   <header aria-label="Page Header" class="bg-gray-50">
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
@@ -109,9 +111,9 @@ function Header(){
             />
   
             <p class="ml-2 hidden text-left text-xs sm:block">
-              <strong class="block font-medium">Eric Frusciante</strong>
+              <strong class="block font-medium">{user.username}</strong>
   
-              <span class="text-gray-500"> eric@frusciante.com </span>
+              <span class="text-gray-500"> {user.email} </span>
             </p>
   
             <svg
@@ -134,7 +136,7 @@ function Header(){
 
       <div class="col-span-2 ...">
         <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
-          Welcome Back, Agent Barry!
+          Welcome Back, Agent {user.username}!
         </h1></div>
       <div class="row-span-2 col-span-2 ...">
       <p class="mt-1.5 text-sm text-gray-500">
@@ -151,6 +153,8 @@ function Header(){
 }
 
 function PointCounter(){
+  const { user } = useAuthContext();
+
   return(
 <article
   class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6"
@@ -173,7 +177,7 @@ function PointCounter(){
   </span>
 
   <div>
-    <p class="text-2xl font-medium text-gray-900">¤ 200 </p>
+    <p class="text-2xl font-medium text-gray-900">¤ {user.totalpoints} </p>
 
     <p class="text-sm text-gray-500">Total Points</p>
   </div>
@@ -272,6 +276,7 @@ return(
     <div class="row-span-3 ..."><GameCard /></div>
     </div>
   </div>
+  <br></br>
 </section>
 )
 }
