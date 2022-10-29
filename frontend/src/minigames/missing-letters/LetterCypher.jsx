@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import puzzles from './letterpuzzles.json'
 
-function LetterCypher(props) {
+function LetterCypher() {
     const [answer, setAnswer] = useState(""); //the player's answer
 
     //Get a random puzzle
