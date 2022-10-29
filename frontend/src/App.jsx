@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Wordle from './pages/Wordle'
 import Landing from './pages/Landing'
