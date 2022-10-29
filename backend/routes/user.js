@@ -5,7 +5,11 @@ const { excludePassword } = require('../utils/users')
 
 router.get('/', async (req, res) => {
     try {
-      const users = await prisma.user.findMany()
+      const users = await prisma.user.findMany({
+        orderBy: {
+          totalpoints: 'asc',
+        },
+      })
       for (const user in users){
         excludePassword(users[user], 'password')
       }
@@ -23,6 +27,7 @@ router.get('/:username', async (req, res) => {
           where: {
             username: username
           },
+          
         })
         delete user['password']
         res.json(user)
