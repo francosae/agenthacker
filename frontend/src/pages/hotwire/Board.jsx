@@ -1,8 +1,8 @@
 import { useState } from "react";
-import PathTile from "./PathTile"
-import './tile-board.css'
+import PathTile from "./Tile"
+import './board.css'
 
-function TileBoard(props){
+function Board(props){
     const [selected, setSelected] = useState('NONE');
     const size = 5; //for now, boards can only be 5x5
     var tiles = [];
