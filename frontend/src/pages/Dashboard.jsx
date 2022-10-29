@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-
+import Footer from '../components/Footer'
 function Dashboard() {
   return (
   <>
@@ -8,6 +8,7 @@ function Dashboard() {
   <Header />
   <GamesHeader />
   <GameDisplay />
+  <Footer />
   </>
   )
 }
@@ -245,13 +246,14 @@ function GameCard(){
         href="#"
         class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
       >
-        Read Blog
+        START MISSION
       </a>
     </div>
   </div>
 </article>
   )
 }
+
 function GameDisplay(){
 return(
 <section
@@ -273,4 +275,5 @@ return(
 </section>
 )
 }
+
 export default Dashboard
