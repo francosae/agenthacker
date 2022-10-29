@@ -1,7 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import './Leaderboard.css'
 import { useAuthContext } from '../contexts/user'
+import API from '../services/apiClient'
+import { useState, useEffect } from 'react'
 function Leaderboard() {
   return (
   <>
@@ -15,147 +18,105 @@ function Leaderboard() {
 }
 
 function Header(){
-  const { user } = useAuthContext();
   return(
-  <header aria-label="Page Header" class="bg-gray-50">
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-      <div class="flex items-center sm:justify-between sm:gap-4">
-        <div class="relative hidden sm:block">
-          <label class="sr-only" for="search"> Search </label>
-  
-          <input
-            class="h-10 w-full rounded-lg border-none bg-white pl-4 pr-10 text-sm shadow-sm sm:w-56"
-            id="search"
-            type="search"
-            placeholder="Search website..."
-          />
-  
-          <button
-            type="button"
-            class="absolute top-1/2 right-1 -translate-y-1/2 rounded-md bg-gray-50 p-2 text-gray-600 transition hover:text-gray-700"
-          >
-            <span class="sr-only">Submit Search</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </button>
+    <>
+    <header class="bg-gray-900 pattern">
+        <div class=" container mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center py-6 lg:h-[15vh] lg:flex-row">
+                <div class="lg:w-1/2">
+                    <h2 class="text-4xl font-semibold text-gray-100">Spy Leaderboard 🕵️</h2>
+    
+                    <h3 class="text-2xl font-semibold text-gray-100">
+                        Check out the top <span class="text-blue-400">agents!</span>
+                    </h3>
+                </div>
+    
+
+            </div>
         </div>
-  
-        <div
-          class="flex flex-1 items-center justify-between gap-8 sm:justify-end"
-        >
-          <div class="flex gap-4">
-            <button
-              type="button"
-              class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700 sm:hidden"
-            >
-              <span class="sr-only">Search</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-  
-            <a
-              href="#"
-              class="block shrink-0 rounded-lg bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700"
-            >
-              <span class="sr-only">Notifications</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-            </a>
-          </div>
-  
-          <button
-            type="button"
-            class="group flex shrink-0 items-center rounded-lg transition"
-          >
-            <span class="sr-only">Menu</span>
-            <img
-              alt="Man"
-              src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-              class="h-10 w-10 rounded-full object-cover"
-            />
-  
-            <p class="ml-2 hidden text-left text-xs sm:block">
-              <strong class="block font-medium">{user.username}</strong>
-  
-              <span class="text-gray-500"> {user.email} </span>
-            </p>
-  
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ml-4 hidden h-5 w-5 text-gray-500 transition group-hover:text-gray-700 sm:block"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="mt-8 grid grid-rows-3 grid-flow-col gap-4">
-
-      <div class="col-span-2 ...">
-        <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
-          Welcome Back, Agent {user.username}!
-        </h1></div>
-      <div class="row-span-2 col-span-2 ...">
-      <p class="mt-1.5 text-sm text-gray-500">
-          Your website has seen a 52% increase in traffic in the last month. Keep
-          it up! 🚀
-      </p>
-      </div>
-      <div class="row-span-3 ..."><PointCounter /></div>
-      </div>
-
-    </div>
-  </header>  
+    </header>
+    </>
   )
 }
 
-function PointCounter(){
-  const { user } = useAuthContext();
 
+function GamesHeader(){
+return(
+<section
+  class="relative"
+>
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="max-w-xl text-center sm:text-left">
+      <h1 class="text-2xl font-bold sm:text-4xl">
+        Top Agents by Points!
+      </h1>
+
+      <p class="mt-1 max-w-lg sm:text-xl sm:leading-relaxed">
+        Complete missions to increase your ranking, agent!
+      </p>
+
+    </div>
+  </div>
+</section>
+)
+}
+
+function GameCard(){
   return(
+<article class="rounded-xl border border-gray-700 bg-[#122c5a] p-4">
+  <div class="flex items-center">
+    <img
+      alt="Developer"
+      src="https://picsum.photos/200"
+      class="h-16 w-16 rounded-full object-cover"
+    />
+
+    <div class="ml-3">
+      <h3 class="text-lg font-medium text-white">Agent Mac</h3>
+    </div>
+  </div>
+
+  <ul class="mt-4 space-y-2">
+    <li>
+      <PointCointer />
+    </li>
+  </ul>
+</article>
+  )
+}
+
+function GameDisplay(){
+    const [users, setUsers] = useState(null)
+    useEffect(() => {
+        async function fetchUsers(){
+          const { data } = await API.fetchUsers()
+          setUsers(data)
+        }
+        fetchUsers()
+      }, [])
+
+      console.log(users)
+return(
+<section
+  class="relative"
+>
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-3 gap-4 ">
+        <GameCard />
+        <GameCard />
+        <GameCard />
+        <GameCard />
+        <GameCard />
+    </div>
+  </div>
+  <br></br>
+</section>
+)
+}
+
+
+function PointCointer(){
+return(
 <article
   class="flex items-center gap-4 rounded-lg border border-gray-100 bg-white p-6"
 >
@@ -177,108 +138,11 @@ function PointCounter(){
   </span>
 
   <div>
-    <p class="text-2xl font-medium text-gray-900">¤ {user.totalpoints} </p>
+    <p class="text-2xl font-medium text-gray-900">¤ 1000 </p>
 
     <p class="text-sm text-gray-500">Total Points</p>
   </div>
 </article>
-  )
-}
-
-function GamesHeader(){
-return(
-<section
-  class="relative"
->
-  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="max-w-xl text-center sm:text-left">
-      <h1 class="text-2xl font-bold sm:text-4xl">
-        Agent Missions
-      </h1>
-
-      <p class="mt-1 max-w-lg sm:text-xl sm:leading-relaxed">
-        Complete missions and get points to be the best spy!
-      </p>
-
-    </div>
-  </div>
-</section>
 )
 }
-
-function GameCard(){
-  return(
-<article class="flex bg-white transition hover:shadow-xl">
-  <div class="rotate-180 p-2 [writing-mode:_vertical-lr]">
-    <time
-      datetime="2022-10-10"
-      class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
-    >
-      <span>2022</span>
-      <span class="w-px flex-1 bg-gray-900/10"></span>
-      <span>Oct 10</span>
-    </time>
-  </div>
-
-  <div class="hidden sm:block sm:basis-56">
-    <img
-      alt="Guitar"
-      src="https://images.unsplash.com/photo-1609557927087-f9cf8e88de18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-      class="aspect-square h-full w-full object-cover"
-    />
-  </div>
-
-  <div class="flex flex-1 flex-col justify-between">
-    <div class="border-l border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
-      <a href="#">
-        <h3 class="font-bold uppercase text-gray-900">
-          Operation Decrypt
-        </h3>
-      </a>
-
-      <p class="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-        dolores, possimus pariatur animi temporibus nesciunt praesentium dolore
-        sed nulla ipsum eveniet corporis quidem, mollitia itaque minus soluta,
-        voluptates neque explicabo tempora nisi culpa eius atque dignissimos.
-        Molestias explicabo corporis voluptatem?
-      </p>
-    </div>
-
-    <div class="sm:flex sm:items-end sm:justify-end">
-      <a
-        href="#"
-        class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
-      >
-        START MISSION
-      </a>
-    </div>
-  </div>
-</article>
-  )
-}
-
-function GameDisplay(){
-return(
-<section
-  class="relative"
->
-  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-    <div class="grid grid-rows-3 grid-flow-col gap-4">
-    <div class="row-span-3 ..."><GameCard /></div>
-    </div>
-    <br></br>
-    <div class="grid grid-rows-3 grid-flow-col gap-4">
-    <div class="row-span-3 ..."><GameCard /></div>
-    </div>
-    <br></br>
-    <div class="grid grid-rows-3 grid-flow-col gap-4">
-    <div class="row-span-3 ..."><GameCard /></div>
-    </div>
-  </div>
-  <br></br>
-</section>
-)
-}
-
 export default Leaderboard
