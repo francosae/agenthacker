@@ -1,8 +1,10 @@
+import { useState } from "react";
 import PathTile from "./PathTile"
 import './tile-board.css'
 
 function TileBoard(props){
-    const size = 5; //for now, boards can only b 5x5
+    const [selected, setSelected] = useState('NONE');
+    const size = 5; //for now, boards can only be 5x5
     var tiles = [];
     for(let row = 0; row < size; row++){
         let tilerow = [];
@@ -12,7 +14,6 @@ function TileBoard(props){
         tiles.push(tilerow);
     }
     //Place start
-    console.log("Start: (" + props.start.x + "," + props.start.y + ")");
     tiles[props.start.x][props.start.y] = <PathTile color='blue' type='S'/>
     
     //Place end
@@ -25,15 +26,16 @@ function TileBoard(props){
         }
     }
 
+    //Todo: Pass info that allows the tile to be switched with another one
+    function onTileClick(tileData){
+        props.onSelect(tileData);
+    }
+
     return(
         <div className="tile-board">
             {tiles}
         </div>
     )
-}
-
-function onTileClick(tileData){
-    console.log(tileData);
 }
 
 export default TileBoard

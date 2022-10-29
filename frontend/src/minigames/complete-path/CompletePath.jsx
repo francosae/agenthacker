@@ -14,11 +14,15 @@ function CompletePath(){
     const randomIndex = Math.floor(Math.random() * (puzzles.length - 1));
     const puzzle = puzzles[randomIndex];
 
+    function switchTile(activeTile, selected){
+        setActiveTile(selected);
+    }
+
     return(
         <div className="complete-path-window">
             <h1>COMPLETE THE PATH</h1>
             Active Tile: <PathTile type={activeTile}/>
-            <TileBoard size={puzzle.size} start={puzzle.start} end={puzzle.end} inner={puzzle.inner}/>
+            <TileBoard size={puzzle.size} start={puzzle.start} end={puzzle.end} inner={puzzle.inner} onSelect={switchTile}/>
         </div>
     )
 }

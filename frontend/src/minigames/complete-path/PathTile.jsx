@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import './tile.css'
 //Tile images
 import tileUp from '../../assets/tile_up.png'
@@ -10,6 +12,8 @@ import tileBlank from '../../assets/tile_blank.png'
 import tileGoal from '../../assets/tile_goal.png'
 
 function PathTile(props){
+    const [type, setType] = useState(props.type);
+
     var tile;
     switch(props.type){
         case '|':
@@ -43,7 +47,9 @@ function PathTile(props){
             {
                 borderColor: props.color ? props.color : 'black'
             }
-        } onClick = {(e) => props.onSelect ? props.onSelect(tile) : null}>
+        //props.onSelect should pass data to the board, which passes it to
+        //the game component so it can switch this tile with the active tile
+        } onClick = {(e) => props.onSelect ? props.onSelect(type) : null}>
             <img src={tile}/>
         </button>
     )
