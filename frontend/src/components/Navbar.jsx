@@ -42,7 +42,7 @@ function Navbar() {
       </nav>
 
       <div class="flex items-center gap-4">
-        {user.username != null ? 
+        {user?.username != null ? 
                 <a
                 class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
                 onClick={() => {handleLogout(), navigate('/')}}

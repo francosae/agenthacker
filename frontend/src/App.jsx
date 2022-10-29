@@ -5,6 +5,8 @@ import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard'
 import SignIn from './pages/SignIn'
 import Leaderboard from './pages/Leaderboard'
+import MissingLetters from './pages/MissingLetters'
+import CompletePath from './pages/CompletePath'
 import { AuthContextProvider } from './contexts/user'
 export default function App() {
 
@@ -16,7 +18,9 @@ export default function App() {
         <Route path="/wordle" element={<Wordle />} />
         <Route path="/home" element={<Dashboard /> } />
         <Route path="/signin" element={< SignIn /> } />
-        <Route path="/Leaderboard" element={< Leaderboard /> } />  
+        <Route path="/Leaderboard" element={< Leaderboard /> } /> 
+        <Route path='/MissingLetters' element={< MissingLetters /> } />
+        <Route path="/CompletePath" element={<CompletePath /> } /> 
       </Routes>
       </BrowserRouter>
       </AuthContextProvider>
