@@ -1,7 +1,10 @@
 import React from 'react'
-import 'alpinejs'
-
+import { useAuthContext } from '../contexts/user'
+import { useNavigate } from 'react-router-dom '
+    
 function Navbar() {
+  const { user, handleLogout } = useAuthContext()
+  const navigate = useNavigate()
   return (
 <header aria-label="Site Header" class="bg-[#122c5a]">
   <div
@@ -31,7 +34,7 @@ function Navbar() {
             </a>
           </li>
           <li>
-            <a class="text-white transition hover:text-gray-500/75" href="/">
+            <a class="text-white transition hover:text-gray-500/75" href="/Leaderboard">
               Spy Leaderboard
             </a>
           </li>
@@ -39,33 +42,49 @@ function Navbar() {
       </nav>
 
       <div class="flex items-center gap-4">
-        <div class="sm:flex sm:gap-4">
-        <a
-          class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
-          href="/download"
-        >
-          <span
-            class="absolute inset-0 border border-[#38fbdb] group-active:border-red-500"
-          ></span>
-          <span
-            class="block border border-[#38fbdb] bg-[#38fbdb] px-12 py-3 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1"
-          >
-            Sign In
-          </span>
-        </a>
+        {user.username != null ? 
+                <a
+                class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
+                onClick={() => {handleLogout(), navigate('/')}}
+              >
+                <span
+                  class="absolute inset-0 border border-[#38fbdb] group-active:border-red-500"
+                ></span>
+                <span
+                  class="block border border-[#38fbdb] bg-[#38fbdb] px-12 py-3 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1"
+                >
+                  Sign out
+                </span>
+              </a>
+              :
+              <div class="sm:flex sm:gap-4">
+              <a
+                class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
+                href="/signin"
+              >
+                <span
+                  class="absolute inset-0 border border-[#38fbdb] group-active:border-red-500"
+                ></span>
+                <span
+                  class="block border border-[#38fbdb] bg-[#38fbdb] px-12 py-3 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1"
+                >
+                  Sign In
+                </span>
+              </a>
 
-          <a
-            class="group relative inline-block text-sm font-medium text-[#5ABAC1] focus:outline-none focus:ring active:text-red-500"
-            href="/download"
-          >
-            <span class="absolute inset-0 border border-current"></span>
-            <span
-              class="block border border-current bg-white px-12 py-3 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
-            >
-              Sign Up
-            </span>
-          </a>
-        </div>
+                <a
+                  class="group relative inline-block text-sm font-medium text-[#5ABAC1] focus:outline-none focus:ring active:text-red-500"
+                  href="/signin"
+                >
+                  <span class="absolute inset-0 border border-current"></span>
+                  <span
+                    class="block border border-current bg-white px-12 py-3 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1"
+                  >
+                    Sign Up
+                  </span>
+                </a>
+              </div>
+              }
 
         <button
           class="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
