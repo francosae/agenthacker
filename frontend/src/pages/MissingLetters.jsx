@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Typed from 'react-typed';
-import puzzles from '../minigames/missing-letters/letterpuzzles.json'
+import puzzles from './missing-letters/letterpuzzles.json'
 function MissingLetters() {
   return (
     <>
@@ -48,7 +48,7 @@ function GameBody(){
                 <div class="max-w-xl text-center sm:text-left">
                 <div className="letter-cypher-window">
                 <h1>Find the encoded string in the following message:</h1>
-                    <h1 className='text-2xl font-semibold text-black'>
+                    <h1 className='bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-transparent sm:text-4xl'>
                     <Typed strings={[`${puzzle.message}`]} typeSpeed={40} backSpeed={0}/>
                     </h1>
                 <form onSubmit={(e) => {
