@@ -58,6 +58,19 @@ class ApiClient {
         })
     }
 
+    async fetchUser(endpoint){
+        return await this.request({
+            endpoint: endpoint,
+            method: `GET`,
+        })
+    }
+    async updatePoints(endpoint){
+        return await this.request({
+            endpoint: endpoint,
+            method: `POST`
+        })
+    }
+
 	async logoutUser() {
 		localStorage.removeItem(this.tokenName);
 	}

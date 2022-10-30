@@ -16,7 +16,7 @@ function Dashboard() {
 }
 
 function Header(){
-  const { user } = useAuthContext();
+  const { user, handleLogout } = useAuthContext();
   return(
   <header aria-label="Page Header" class="bg-gray-50">
     <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
@@ -101,7 +101,7 @@ function Header(){
             </a>
           </div>
   
-          <Userdropdown user={user}/>
+          <Userdropdown logout={handleLogout} user={user}/>
         </div>
       </div>
 
@@ -374,7 +374,7 @@ return(
 
       <p class="mt-2 text-sm leading-relaxed text-gray-700 line-clamp-3">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-        dolores, possimus pariatur animi temporibus nesciunt praesentium dolore
+        dolores, possimus pariatur animi tempgit oribus nesciunt praesentium dolore
         sed nulla ipsum eveniet corporis quidem, mollitia itaque minus soluta,
         voluptates neque explicabo tempora nisi culpa eius atque dignissimos.
         Molestias explicabo corporis voluptatem?

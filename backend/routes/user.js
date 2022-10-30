@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     try {
       const users = await prisma.user.findMany({
         orderBy: {
-          totalpoints: 'asc',
+          totalpoints: 'desc',
         },
       })
       for (const user in users){
@@ -36,5 +36,19 @@ router.get('/:username', async (req, res) => {
       }
     })
 
-  
+router.post('/:username/points', async (req, res) => {
+  const { username } = req.params
+  try {
+    const user = await prisma.user.update({
+      where: {
+        username: username
+      },
+      data: {
+        totalpoints: { increment: 100 }
+      }
+    })
+  } catch (error){
+    console.log(error)
+  }
+})
 module.exports = router;
