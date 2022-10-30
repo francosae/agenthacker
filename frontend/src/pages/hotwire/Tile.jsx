@@ -14,6 +14,7 @@ import tileGoal from '../../assets/tile_goal.png'
 
 function Tile(props){
     const [type, setType] = useState(props.type); //the wire direction for the tiles
+    const [tileImage, setImage] = useState();
 
     var image;
     //Maybe an enum would be better
@@ -44,14 +45,54 @@ function Tile(props){
             image = tileBlank;
     }
 
+    function changeType(type){
+        setType(type);
+        switch(type){
+            case '|':
+                setImage(tileUp);
+                break;
+            case '-':
+                setImage(tileSide);
+                break;
+            case '<^':
+                setImage(tileLeftUp);
+                break;
+            case '^>':
+                setImage(tileRightUp);
+                break;
+            case '<v':
+                setImage(tileLeftDown);
+                break;
+            case 'v>':
+                setImage(tileRightDown);
+                break;
+            case 'S':
+            case 'E':
+                setImage(tileGoal);
+                break;
+            default:
+                setImage(tileBlank);
+        }
+    }
+    
+    if(!props.type){
+        return <span className='tile'></span>
+    }
+    if(props.type == 'S' || props.type == 'E'){
+        return <span className='tile' style={
+            {
+                borderColor: props.color ? props.color : 'black'
+            }
+        }>
+            <img src={image}/>
+        </span>
+    }
     return(
         <button className="tile" style={
             {
                 borderColor: props.color ? props.color : 'black'
             }
-        //props.onSelect should pass data to the board, which passes it to
-        //the game component so it can switch this tile with the active tile
-        } onClick = {(e) => props.onSelect ? props.onSelect(type) : null}>
+        } onClick={(e) => {props.onSelect ? props.onSelect(type, props.position) : null}}>
             <img src={image}/>
         </button>
     )
